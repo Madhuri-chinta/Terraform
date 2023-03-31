@@ -12,7 +12,7 @@ provider "aws" {
 }
 terraform {
   backend "s3" {
-    bucket         = "mysweetymadhuribucket"
+    bucket         = "test-bucket-31st"
     dynamodb_table = "mysweetymadhuri"
     key            = "madhuri/hellotf"
     region         = "ap-south-1"
