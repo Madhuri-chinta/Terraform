@@ -13,8 +13,8 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket         = "test-bucket-31st"
-    dynamodb_table = "mysweetymadhuri"
-    key            = "madhuri/hellotf"
+    dynamodb_table = "test-backend"
+    key            = "test"
     region         = "ap-south-1"
   }
 }
