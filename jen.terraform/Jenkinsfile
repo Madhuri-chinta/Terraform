@@ -9,10 +9,9 @@ pipeline {
         }
         stage('terraform') {
             steps {
-                sh """cd jen.terraform
-                      terraform init
-                      terraform apply -var-file ./values.tfvars -auto-approve
-                      terraform destroy -var-file ./values.tfvars -auto-approve"""
+                sh 'cd jen.terraform'
+                sh 'terraform init'
+                sh 'terraform apply -var-file ./values.tfvars -auto-approve'
             }
         }
     }
