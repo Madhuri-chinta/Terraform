@@ -12,7 +12,7 @@ pipeline {
                 sh 'cd jen.terraform'
                 sh 'terraform init'
                 sh 'terrafrom validate'
-                sh 'terraform apply -var-file .\values.tfvars' -auto-approve
+                sh 'terraform apply -var-file .\values.tfvars -auto-approve'
             }
         }
     }
