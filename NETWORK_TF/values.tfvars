@@ -23,7 +23,6 @@ sg_info = {
 instance_info = {
   Name              = "Madhuri"
   ami               = "ami-02eb7a4783e7e9317"
-  availability_zone = "ap-south-1c"
   instance_type     = "t3.micro"
   key_name          = "key1"
 }

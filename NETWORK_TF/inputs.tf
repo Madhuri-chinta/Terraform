@@ -34,7 +34,6 @@ variable "instance_info" {
   type = object({
     ami               = string
     instance_type     = string
-    availability_zone = string
     key_name          = string
     Name              = string
   })
