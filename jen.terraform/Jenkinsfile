@@ -1,0 +1,19 @@
+pipeline {
+    agent { label 'UBUNTU_NODE1' }
+    stages {
+        stage('vcs') {
+            steps {
+                git url: 'https://github.com/Madhuri-chinta/terraformworkspace.git,'
+                    branch: 'main'
+            }
+        }
+        stage('terraform') {
+            steps {
+                sh 'cd jen.terraform'
+                sh 'terraform init'
+                sh 'terrafrom validate'
+                sh 'terraform apply -var-file .\values.tfvars' -auto-approve
+            }
+        }
+    }
+}
