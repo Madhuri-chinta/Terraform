@@ -11,7 +11,8 @@ pipeline {
             steps {
                 sh """cd jen.terraform
                       terraform init
-                      terraform apply -var-file ./values.tfvars -auto-approve"""
+                      terraform apply -var-file ./values.tfvars -auto-approve
+                      terraform destroy -var-file ./values.tfvars -auto-approve"""
             }
         }
     }
