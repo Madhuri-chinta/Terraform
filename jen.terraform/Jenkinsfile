@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('vcs') {
             steps {
-                git url: 'https://github.com/Madhuri-chinta/terraformworkspace.git,'
+                git url: 'https://github.com/Madhuri-chinta/terraformworkspace.git',
                     branch: 'main'
             }
         }
