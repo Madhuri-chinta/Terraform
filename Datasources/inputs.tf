@@ -6,11 +6,11 @@ variable "instance_info" {
   type = object({
     instance_type = string
     key_name      = string
-    Name          = string
+    Names         = string
     ami           = string
   })
   default = {
-    Name          = "web"
+    Name         = "web"
     ami           = "ami-02eb7a4783e7e9317"
     instance_type = "t3.micro"
     key_name      = "import"
