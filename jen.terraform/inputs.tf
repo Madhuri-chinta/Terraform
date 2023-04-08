@@ -12,12 +12,16 @@ variable "subnets_info" {
 }
 variable "instance_info" {
   type = object({
-    ami = string
-    Names      = list(string)
+    ami           = string
+    Names         = list(string)
     instance_type = string
-    key = string
-    
+    key           = string
+
   })
+}
+variable "rollout_version" {
+  type = string
+
 }
 
 

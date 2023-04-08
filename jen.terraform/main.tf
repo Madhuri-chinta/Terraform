@@ -27,7 +27,7 @@ resource "aws_route_table" "route" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
-    tags = {
+  tags = {
     Name = "route"
   }
 }
@@ -41,20 +41,20 @@ resource "aws_security_group" "security" {
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 0
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-    
+    description = "TLS from VPC"
+    from_port   = 0
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-  
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+
   }
 
   tags = {
@@ -62,15 +62,32 @@ resource "aws_security_group" "security" {
   }
 }
 resource "aws_instance" "instance" {
-  count = length(var.instance_info.Names)
-  ami           = var.instance_info.ami
-  instance_type = var.instance_info.instance_type
+  count                       = length(var.instance_info.Names)
+  ami                         = var.instance_info.ami
+  instance_type               = var.instance_info.instance_type
   associate_public_ip_address = true
-  key_name = var.instance_info.key
-  subnet_id = aws_subnet.subnets[0].id
-  vpc_security_group_ids = [ aws_security_group.security.id ]
+  key_name                    = var.instance_info.key
+  subnet_id                   = aws_subnet.subnets[0].id
+  vpc_security_group_ids      = [aws_security_group.security.id]
   tags = {
     Name = var.instance_info.Names[count.index]
   }
-  user_data                   = file("nginx.sh")
+
+}
+resource "null_resource" "executor" {
+  triggers = {
+    rollout_version = var.rollout_version
+  }
+  connection {
+    host        = aws_instance.instance[0].public_ip
+    user        = "ubuntu"
+    private_key = file("~/.ssh/id_rsa")
+    type        = "ssh"
+
+  }
+  provisioner "remote-exec" {
+    inline = ["sudo apt update", "sudo apt install software-properties-common", "sudo add-apt-repository --yes --update ppa:ansible/ansible", "sudo apt install ansible -y"]
+
+  }
+
 }

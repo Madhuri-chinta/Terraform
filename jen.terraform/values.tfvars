@@ -7,8 +7,9 @@ subnets_info = {
   cidr_block = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
 instance_info = {
-  Names = [ "instance1","instance2" ]
-  ami = "ami-02eb7a4783e7e9317"
+  Names         = ["instance1", "instance2"]
+  ami           = "ami-02eb7a4783e7e9317"
   instance_type = "t3.micro"
-  key = "key1"
+  key           = "key1"
 }
+rollout_version = "0.0.0.0"
